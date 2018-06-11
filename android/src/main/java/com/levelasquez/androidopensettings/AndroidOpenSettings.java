@@ -32,8 +32,9 @@ public class AndroidOpenSettings extends ReactContextBaseJavaModule {
     public void notificationsSettings() {
         Intent intent = new Intent();
         if (Build.VERSION.SDK_INT >= AndroidOpenSettings.O) {
-            intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            intent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");
             intent.setData(Uri.parse("package:" + reactContext.getPackageName()));
+            intent.putExtra("android.provider.extra.APP_PACKAGE", reactContext.getPackageName());
         } else if (Build.VERSION.SDK_INT >= AndroidOpenSettings.N_MR1) {
             intent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");
             intent.putExtra("app_package", reactContext.getPackageName());
