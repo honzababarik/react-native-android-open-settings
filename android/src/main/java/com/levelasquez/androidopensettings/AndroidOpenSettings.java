@@ -3,6 +3,8 @@ package com.levelasquez.androidopensettings;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.Settings;
+import android.os.Build;
+import android.os.;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
@@ -28,7 +30,7 @@ public class AndroidOpenSettings extends ReactContextBaseJavaModule {
         Intent intent = new Intent();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-            intent.setData(Uri.fromParts(SCHEME, reactContext.getPackageName(), null));
+            intent.setData(Uri.parse("package:" + reactContext.getPackageName()));
         } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N_MR1) {
             intent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");
             intent.putExtra("app_package", reactContext.getPackageName());
