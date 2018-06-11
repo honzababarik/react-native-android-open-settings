@@ -25,11 +25,24 @@ public class AndroidOpenSettings extends ReactContextBaseJavaModule {
     
     @ReactMethod
     public void notificationsSettings() {
-        Intent intent = new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-        intent.putExtra(Settings.EXTRA_APP_PACKAGE, reactContext.getPackageName());
-        intent.putExtra(Settings.EXTRA_CHANNEL_ID, "org.develite.beacoin-channel_NN");
+        Intent intent = new Intent();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            intent.setData(Uri.fromParts(SCHEME, reactContext.getPackageName(), null));
+        } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N_MR1) {
+            intent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");
+            intent.putExtra("app_package", reactContext.getPackageName());
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            intent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");
+            intent.putExtra("app_package", reactContext.getPackageName());
+            intent.putExtra("app_uid", reactContext.getApplicationInfo().uid);
+        } else if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+            intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            intent.addCategory(Intent.CATEGORY_DEFAULT);
+            intent.setData(Uri.parse("package:" + reactContext.getPackageName()));
+        } else {
+            return;
+        }
         if (intent.resolveActivity(reactContext.getPackageManager()) != null) {
             reactContext.startActivity(intent);
         }
