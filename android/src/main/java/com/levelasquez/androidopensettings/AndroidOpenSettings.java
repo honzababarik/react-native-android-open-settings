@@ -13,6 +13,10 @@ import com.facebook.react.bridge.ReactMethod;
 public class AndroidOpenSettings extends ReactContextBaseJavaModule {
 
     private ReactContext reactContext;
+    public static final int O = 26; 
+    public static final int N_MR1 = 25; 
+    public static final int LOLLIPOP = 21; 
+    public static final int KITKAT = 19; 
 
     public AndroidOpenSettings(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -27,17 +31,17 @@ public class AndroidOpenSettings extends ReactContextBaseJavaModule {
     @ReactMethod
     public void notificationsSettings() {
         Intent intent = new Intent();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= AndroidOpenSettings.O) {
             intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
             intent.setData(Uri.parse("package:" + reactContext.getPackageName()));
-        } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N_MR1) {
+        } else if (Build.VERSION.SDK_INT >= AndroidOpenSettings.N_MR1) {
             intent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");
             intent.putExtra("app_package", reactContext.getPackageName());
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        } else if (Build.VERSION.SDK_INT >= AndroidOpenSettings.LOLLIPOP) {
             intent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");
             intent.putExtra("app_package", reactContext.getPackageName());
             intent.putExtra("app_uid", reactContext.getApplicationInfo().uid);
-        } else if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+        } else if (Build.VERSION.SDK_INT == AndroidOpenSettings.KITKAT) {
             intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
             intent.addCategory(Intent.CATEGORY_DEFAULT);
             intent.setData(Uri.parse("package:" + reactContext.getPackageName()));
