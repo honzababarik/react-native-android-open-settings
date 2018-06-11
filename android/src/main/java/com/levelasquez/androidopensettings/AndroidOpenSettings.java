@@ -53,6 +53,16 @@ public class AndroidOpenSettings extends ReactContextBaseJavaModule {
             reactContext.startActivity(intent);
         }
     }
+    
+    @ReactMethod
+    public void notificationsSettings() {
+        Intent intent = new Intent(Settings.APP_NOTIFICATION_SETTINGS);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        if (intent.resolveActivity(reactContext.getPackageManager()) != null) {
+            reactContext.startActivity(intent);
+        }
+    }
 
     @ReactMethod
     public void locationSourceSettings() {
