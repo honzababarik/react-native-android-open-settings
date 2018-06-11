@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.provider.Settings;
 import android.os.Build;
-import android.os.;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
