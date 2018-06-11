@@ -22,6 +22,8 @@ const dateSettings = () => RNAndroidOpenSettings.dateSettings()
 
 const localeSettings = () => RNAndroidOpenSettings.localeSettings()
 
+const notificationsSettings = () => RNAndroidOpenSettings.notificationsSettings()
+
 const inputMethodSettings = () => RNAndroidOpenSettings.inputMethodSettings()
 
 const displaySettings = () => RNAndroidOpenSettings.displaySettings()
@@ -57,4 +59,5 @@ module.exports = {
   accessibilitySettings,
   applicationSettings,
   deviceInfoSettings,
+  notificationsSettings,
 }
