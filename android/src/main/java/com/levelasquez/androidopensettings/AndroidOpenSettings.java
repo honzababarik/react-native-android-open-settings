@@ -56,7 +56,7 @@ public class AndroidOpenSettings extends ReactContextBaseJavaModule {
     
     @ReactMethod
     public void notificationsSettings() {
-        Intent intent = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
+        Intent intent = new Intent("android.settings.APP_NOTIFICATION_SETTINGS");
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         intent.setData(Uri.parse("package:" + reactContext.getPackageName()));
