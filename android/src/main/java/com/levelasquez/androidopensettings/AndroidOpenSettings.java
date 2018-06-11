@@ -28,7 +28,7 @@ public class AndroidOpenSettings extends ReactContextBaseJavaModule {
         Intent intent = new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-        intent.putExtra(Settings.EXTRA_APP_PACKAGE, reactContext.getPackageName())
+        intent.putExtra(Settings.EXTRA_APP_PACKAGE, reactContext.getPackageName());
         intent.putExtra(Settings.EXTRA_CHANNEL_ID, "org.develite.beacoin-channel_NN");
         if (intent.resolveActivity(reactContext.getPackageManager()) != null) {
             reactContext.startActivity(intent);
